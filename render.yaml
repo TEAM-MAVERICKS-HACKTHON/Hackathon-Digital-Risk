@@ -19,7 +19,7 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        value: https://threatnexus-api.onrender.com/api
+        value: https://threatnexus-backend.onrender.com/api
     routes:
       - type: rewrite
         source: /*
