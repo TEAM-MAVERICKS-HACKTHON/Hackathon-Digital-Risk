@@ -1,4 +1,3 @@
-# Hackathon-Digital-Risk
 # ThreatNexus — Detect. Connect. Protect.
 
 ThreatNexus is a hackathon-ready AI-assisted Digital Risk Protection prototype. It demonstrates how a brand security team can review potentially fake social profiles, suspicious URLs, and impersonating mobile applications, assign explainable risk scores, and explore evidence-based relationships in a threat graph.
