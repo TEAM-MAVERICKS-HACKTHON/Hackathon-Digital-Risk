@@ -10,7 +10,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: FRONTEND_URL
-        value: https://threatnexus.onrender.com
+        value: https://hackathon-digital-risk.onrender.com
   - type: web
     name: threatnexus
     runtime: static
