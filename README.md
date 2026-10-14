@@ -1,301 +1,251 @@
-# ThreatNexus — Detect. Connect. Protect.
+# ThreatNexus — AI-Powered Digital Risk Protection Platform
 
-ThreatNexus is a hackathon-ready AI-assisted Digital Risk Protection prototype. It demonstrates how a brand security team can review potentially fake social profiles, suspicious URLs, and impersonating mobile applications, assign explainable risk scores, and explore evidence-based relationships in a threat graph.
+**Team Name:** THE MAVERICKS  
+**Team Unique ID:** XL0939
 
-> **Important:** This project is a prototype. Its built-in scoring rules are heuristic demonstrations, not a validated machine-learning model or a guarantee that an asset is malicious. The seeded incidents are simulated demo data. Verify findings using trusted sources before taking action.
+## 🚀 Project Overview
 
-## Features
+ThreatNexus is a digital risk protection platform designed to help identify potentially fake profiles, suspicious links, and risky applications through a unified interface. It aims to make digital threat assessment easier by analyzing available information, presenting risk scores, and visualizing results through a centralized dashboard.
 
-- **Dashboard:** overview KPIs, risk distribution, scan trends, recent detections.
-- **Profile checks:** username/brand similarity, impersonation language, suspicious profile signals.
-- **Link checks:** URL parsing, lookalike host signals, misleading subdomains, URL shorteners, suspicious keywords, HTTPS signal.
-- **Application checks:** app/publisher identity mismatch, brand-name similarity, suspicious permission signals, unofficial-source indicators.
-- **Explainable scoring:** 0–100 score, Low / Medium / High / Critical labels, triggered evidence and suggested next steps.
-- **Threat graph:** interactive graph of sample profiles, domains and apps, with evidence-based sample relationships.
-- **Scan history:** scan results remain in backend memory while the server process is running.
-- **API health endpoint** and CORS configuration for local development and Render.
-- **Demo data:** enables a working presentation without third-party API keys.
+The platform combines profile analysis, URL risk assessment, and application information analysis to help users recognize potential digital threats and prioritize further investigation.
 
-## Technology
+## 🔗 Live Deployment
 
-- Frontend: React, Vite, React Router, Axios, Recharts, React Flow (`@xyflow/react`), Lucide icons.
-- Backend: Node.js, Express, Helmet, CORS, Morgan, express-rate-limit.
-- Storage: in-memory prototype data. Data resets when the backend restarts. Add a database before using this for persistent production records.
-- Deployment: Render Static Site + Render Web Service.
+- **Frontend:** https://hackathon-digital-risk.onrender.com
+- **Backend API:** https://threatnexus-backend.onrender.com
 
-## Project structure
+## 🎯 Problem Statement
+
+The rapid growth of online platforms has increased the risks associated with fake identities, phishing links, fraudulent applications, impersonation, and other forms of digital deception. These threats can result in financial loss, identity theft, privacy violations, and unauthorized access to personal information.
+
+Existing checks may be scattered across different services, making it difficult for users to evaluate different types of digital risks in one place.
+
+**Our challenge is to develop a centralized, accessible platform that evaluates suspicious profiles, links, and applications and presents understandable risk indicators to support safer digital decisions.**
+
+## 💡 Our Solution Approach
+
+ThreatNexus provides a unified digital risk assessment workflow with three main detection modules:
+
+### 1. Fake Profile Detection
+Evaluates available profile information and configured indicators to identify potentially suspicious or impersonating accounts. Depending on the implemented checks, these indicators may include username and display-name inconsistencies, profile completeness, account age, and other suspicious patterns.
+
+### 2. Suspicious Link Detection
+Analyzes submitted URLs for configured warning signs, such as unusual URL structures, suspicious keywords, misleading domain patterns, or other potentially unsafe characteristics.
+
+### 3. Suspicious Application Detection
+Reviews available application information and configured risk indicators to flag applications that may require additional investigation.
+
+### 4. Risk Scoring
+Uses the indicators supported by the implementation to produce a risk score or risk category. This helps users prioritize items for review. The score should not be interpreted as a verified probability of malicious activity unless it has been calibrated and validated for that purpose.
+
+### 5. Interactive Dashboard
+Provides a centralized interface for viewing assessments, risk levels, and graphical summaries, making the results easier to understand.
+
+## ✨ Key Features
+
+- Centralized digital risk assessment dashboard
+- Fake profile and impersonation assessment
+- Suspicious URL and link analysis
+- Suspicious application assessment
+- Risk scores and risk-level indicators
+- Graphical representation of assessment results
+- React-based user interface
+- Node.js and Express.js backend
+- Separate frontend and backend deployment on Render
+
+*Available features and checks depend on the current implementation.*
+
+## 🛠️ Technology Stack
+
+| Component | Technologies |
+|---|---|
+| Frontend framework | React.js |
+| Frontend languages | HTML5, CSS3, JavaScript |
+| Backend runtime | Node.js |
+| Backend framework | Express.js |
+| API communication | HTTP/HTTPS and JSON |
+| API architecture | REST-style endpoints, as configured |
+| Deployment | Render |
+| Version control | Git |
+| Source code hosting | GitHub |
+
+## 🧠 Models and Algorithms
+
+The platform's exact algorithms and models must match the implementation in the source code. The following are the relevant approaches for the project's detection workflow.
+
+### Feature-Based Analysis
+Examines available characteristics of profiles, URLs, and application information to identify potential warning signs.
+
+### Rule-Based and Heuristic Detection
+Uses predefined conditions, patterns, or thresholds to identify suspicious characteristics when these checks are implemented in the backend.
+
+### Risk Scoring and Classification
+Combines configured indicators into a score or category, such as Low, Medium, or High, if supported by the implementation. The weights and thresholds should be documented according to the actual code.
+
+### Data Visualization
+Uses charts or graphical summaries to present risk assessment results. Visualization supports interpretation; it is not itself a detection algorithm.
+
+**Machine learning note:** Do not claim a trained model, neural network, or specific algorithm such as Random Forest, SVM, or XGBoost unless the project actually implements it. A future enhancement could introduce a trained classifier evaluated on a labeled dataset.
+
+## 🏗️ System Architecture
+
+The application follows a frontend-backend architecture.
+
+1. **User Interface:** The user opens the React frontend and selects a detection module.
+2. **Input Collection:** The user supplies the profile, URL, or application information required by that module.
+3. **API Request:** The frontend sends the request to the backend over HTTP/HTTPS.
+4. **Risk Assessment:** The backend executes the configured validation, detection, and scoring logic.
+5. **API Response:** The backend returns the assessment results in the response format supported by the API.
+6. **Dashboard Visualization:** The frontend presents the returned score, risk indicators, and available visual summaries.
+
+## 🔌 API and Backend Integration
+
+**Backend base URL:**
+
+https://threatnexus-backend.onrender.com
+
+The frontend should use this base URL when communicating with the deployed backend.
+
+For a Vite-based frontend, an environment variable may look like:
+
+```env
+VITE_API_BASE_URL=https://threatnexus-backend.onrender.com
+```
+
+Use the environment variable name expected by your actual frontend build configuration. If the project uses Create React App, the convention is commonly `REACT_APP_API_BASE_URL`.
+
+API requests should use the actual routes and HTTP methods defined in the backend source code. Endpoint paths are intentionally not guessed here.
+
+### Integration Requirements
+
+- Configure the frontend to call the deployed backend URL.
+- Configure backend CORS to allow the deployed frontend origin.
+- Ensure the backend listens on the port provided by Render.
+- Check browser developer tools and backend logs for failed requests.
+- Rebuild and redeploy the frontend after changing build-time environment variables.
+
+## 📁 Project Structure
+
+A typical high-level structure is:
 
 ```text
 ThreatNexus/
 ├── frontend/
+│   ├── public/
 │   ├── src/
-│   │   ├── components/       # Sidebar, layout, KPI cards, threat graph
-│   │   ├── pages/            # Dashboard, scanners, threat intelligence
-│   │   ├── services/api.js   # Axios client
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
-│   ├── .env.example
-│   ├── index.html
-│   └── package.json
+│   ├── package.json
+│   └── ...
 ├── backend/
-│   ├── src/
-│   │   ├── data/demoData.js
-│   │   ├── middleware/errorHandler.js
-│   │   ├── routes/
-│   │   ├── services/          # Detection and scoring rules
-│   │   ├── app.js
-│   │   └── server.js
-│   ├── .env.example
-│   └── package.json
-├── render.yaml
-├── .gitignore
+│   ├── package.json
+│   ├── server.js
+│   └── ...
 └── README.md
 ```
 
-## Requirements
+The exact structure may differ depending on the files in the repository.
 
-Install:
-- Node.js 20 or newer (LTS recommended)
-- npm
-- Git (for GitHub upload)
+## 💻 Installation and Local Setup
 
-Check versions:
+### Prerequisites
+
+- Node.js and npm
+- Git
+- A local copy of the project repository
+
+### Step 1: Clone the Repository
+
+Replace the example repository URL with the actual GitHub repository URL.
 
 ```bash
-node --version
-npm --version
-git --version
+git clone <YOUR_GITHUB_REPOSITORY_URL>
+cd <YOUR_PROJECT_FOLDER>
 ```
 
-## Run locally on Windows PowerShell
+### Step 2: Start the Backend
 
-### 1. Start the backend
-
-Open PowerShell in the extracted `ThreatNexus` folder:
-
-```powershell
-cd backend
-Copy-Item .env.example .env
-npm install
-npm run dev
-```
-
-Backend default: `http://localhost:5000`  
-Health check: `http://localhost:5000/api/health`
-
-Leave this terminal open.
-
-### 2. Start the frontend
-
-Open a **second** PowerShell terminal in the extracted `ThreatNexus` root folder:
-
-```powershell
-cd frontend
-Copy-Item .env.example .env
-npm install
-npm run dev
-```
-
-Open the Vite URL printed in the terminal, usually `http://localhost:5173`.
-
-### macOS/Linux alternative
-
-Run each in its own terminal:
+Open a terminal:
 
 ```bash
 cd backend
-cp .env.example .env
 npm install
-npm run dev
+npm start
 ```
+
+Use the development script provided by your backend's `package.json` if `npm start` is not defined.
+
+### Step 3: Start the Frontend
+
+Open another terminal:
 
 ```bash
 cd frontend
-cp .env.example .env
 npm install
 npm run dev
 ```
 
-## API endpoints
+Use the frontend start script defined in its `package.json` if it differs.
 
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/health` | API status |
-| GET | `/api/dashboard/summary` | KPI totals and risk counts |
-| GET | `/api/dashboard/trends` | Demo scan trend data |
-| GET | `/api/threats` | Recent threat records |
-| GET | `/api/graph` | Nodes and edges for the threat graph |
-| POST | `/api/profiles/scan` | Analyze a profile's submitted metadata |
-| POST | `/api/links/scan` | Analyze a URL string |
-| POST | `/api/apps/scan` | Analyze application metadata |
+### Step 4: Configure the API URL
 
-### Example API request
+For local testing, configure the frontend to call your locally running backend. For the deployed application, use the Render backend URL shown above.
 
-PowerShell:
+## ☁️ Deployment
 
-```powershell
-Invoke-RestMethod -Method Post `
-  -Uri http://localhost:5000/api/links/scan `
-  -ContentType "application/json" `
-  -Body '{"url":"https://paypaI-security.example-login.com/verify"}'
-```
+The project is deployed on Render as separate frontend and backend services.
 
-The returned score is a heuristic indicator for demonstration. Do not use a scan result alone as proof of fraud.
+- **Frontend service:** https://hackathon-digital-risk.onrender.com
+- **Backend service:** https://threatnexus-backend.onrender.com
 
-## Risk score interpretation
+For reliable deployment:
 
-| Score | Level | Suggested handling |
-|---:|---|---|
-| 0–29 | Low | Record and monitor |
-| 30–59 | Medium | Review the evidence |
-| 60–79 | High | Prioritize investigation |
-| 80–100 | Critical | Urgent human verification |
+1. Confirm the frontend service builds successfully.
+2. Confirm the backend service starts successfully.
+3. Verify the frontend API base URL.
+4. Verify backend CORS settings.
+5. Test each detection module using valid and suspicious-looking sample inputs.
+6. Review service logs and browser console errors if a request fails.
 
-Each scanner returns the score, risk level, triggered evidence, a short explanation and recommended next action. The rules are intentionally visible in `backend/src/services/`.
+## 🧪 Testing and Evaluation
 
-## GitHub: upload the project
+Recommended validation includes:
 
-1. Create an empty repository on GitHub, for example `ThreatNexus`.
-2. Open PowerShell in the extracted project root (the folder containing this README).
-3. Replace `YOUR-OWNER` with your GitHub username or organization.
+- Testing profile inputs with different characteristics.
+- Testing normal, malformed, and suspicious-looking URLs.
+- Testing application inputs with complete and incomplete information.
+- Verifying that frontend requests reach the backend.
+- Checking that scores, labels, and charts match the API response.
+- Recording false positives, false negatives, and known limitations.
 
-```powershell
-git init
-git add .
-git commit -m "Initial ThreatNexus project"
-git branch -M main
-git remote add origin https://github.com/YOUR-OWNER/ThreatNexus.git
-git push -u origin main
-```
+Accuracy, precision, recall, F1-score, and similar metrics should be reported only after evaluation on a suitable labeled dataset.
 
-If `origin` already exists, check it first:
+## 🔐 Security and Responsible Use
 
-```powershell
-git remote -v
-```
+- Use the platform only to review information you are authorized to analyze.
+- Do not submit passwords, private access tokens, or unnecessary sensitive information.
+- Treat risk scores as indicators for further review, not definitive proof of malicious activity.
+- Verify suspicious findings through trusted sources before taking action.
+- Protect API endpoints and avoid exposing secrets in frontend code or public repositories.
 
-### GitHub authentication
+## 🔮 Future Enhancements
 
-GitHub no longer accepts account passwords for HTTPS Git pushes. Use GitHub CLI:
+- Integrate trusted threat-intelligence and domain-reputation services.
+- Introduce trained machine-learning models using appropriately labeled datasets.
+- Add explainable risk indicators for each assessment.
+- Evaluate and calibrate scoring thresholds.
+- Improve API documentation and automated testing.
+- Add case history, reporting, and analyst feedback.
+- Expand monitoring and alerting capabilities.
 
-```powershell
-gh auth login
-gh auth setup-git
-gh auth status
-git push -u origin main
-```
+## 👥 Team Information
 
-Install GitHub CLI first if it is not installed. Alternatively, use a valid Personal Access Token through a secure credential prompt. Never commit a token, password or `.env` file.
+- **Team Name:** THE MAVERICKS
+- **Team Unique ID:** XL0939
+- **Project:** ThreatNexus — Digital Risk Protection Platform
 
-## Invite and tag teammates
+## 📌 Conclusion
 
-### Invite collaborators
-1. Open the repository on GitHub.
-2. Open **Settings → Collaborators** (or repository access settings for an organization).
-3. Invite teammates by GitHub username.
-4. Teammates must accept the invitation.
+ThreatNexus aims to bring fake-profile assessment, suspicious-link analysis, and application-risk assessment into one platform. By combining configured detection logic, risk scoring, and dashboard visualization, it helps users organize digital risk checks and prioritize further investigation.
 
-### Suggested work split
-- Teammate 1: profile detection and tests
-- Teammate 2: link and application detection
-- Teammate 3: dashboard, graph and presentation
-- Team lead: integration, pull-request review and deployment
+---
 
-### Use a feature branch
-
-```powershell
-git checkout -b feature/profile-detection
-git add .
-git commit -m "Improve profile detection"
-git push -u origin feature/profile-detection
-```
-
-Open a Pull Request on GitHub and merge after review.
-
-### Tag/mention teammates
-In an issue, pull request, or comment, type `@github-username` and select the teammate. This mentions them; it is not the same as a Git release tag.
-
-### Create a version tag
-
-After the final version is merged into `main`:
-
-```powershell
-git checkout main
-git pull origin main
-git tag -a v1.0.0 -m "ThreatNexus hackathon release"
-git push origin v1.0.0
-```
-
-## Deploy on Render
-
-You can deploy both services from the same GitHub repository.
-
-### Option A: use the included `render.yaml`
-1. Push the project to GitHub.
-2. In Render, choose **New → Blueprint** and connect the repository.
-3. Render reads `render.yaml` and creates the backend web service and frontend static site.
-4. Review the generated services and deploy.
-5. Confirm the frontend's `VITE_API_URL` points to the deployed backend URL.
-
-### Option B: create services manually
-
-**Backend Web Service**
-- Root Directory: `backend`
-- Build Command: `npm install`
-- Start Command: `npm start`
-- Health Check Path: `/api/health`
-- Environment: `NODE_ENV=production`
-- `FRONTEND_URL`: your deployed frontend URL
-
-**Frontend Static Site**
-- Root Directory: `frontend`
-- Build Command: `npm install && npm run build`
-- Publish Directory: `dist`
-- Environment: `VITE_API_URL=https://YOUR-BACKEND.onrender.com/api`
-
-For a React Router single-page application, add a Render rewrite rule from `/*` to `/index.html` with action `Rewrite` if direct navigation to nested pages returns 404.
-
-Render may take time to start an inactive free web service. Test both URLs before presenting.
-
-## Security and limitations
-
-- This prototype analyzes submitted text and metadata; it does not automatically crawl all social platforms or app stores.
-- It does not download or execute APKs and does not open submitted URLs. Avoid adding server-side URL fetching without SSRF protections.
-- It uses heuristic rules rather than a trained/validated AI model. Do not advertise accuracy percentages unless evaluated against a labeled test dataset.
-- Demo incidents and graph links are synthetic.
-- The backend currently stores new scans in memory. Add persistent database storage, authentication, authorization, audit logging and retention controls before production use.
-- Keep secrets server-side. Never put secret keys in `VITE_*` variables because they are exposed in the browser bundle.
-- Treat results as leads for human review, not automatic accusations or takedown decisions.
-
-## Troubleshooting
-
-**Frontend says “API unavailable”**
-- Ensure backend is running on port 5000.
-- Check `frontend/.env` contains `VITE_API_URL=http://localhost:5000/api`.
-- Restart Vite after changing `.env`.
-
-**CORS error**
-- Set `FRONTEND_URL` in `backend/.env` to the exact frontend origin, including scheme and port.
-- Restart backend.
-
-**Port already in use**
-- Stop the other process or change `PORT` in `backend/.env`, then update the API URL.
-
-**Git push authentication failed**
-- Run `gh auth login`, then `gh auth setup-git`, and retry.
-
-## Hackathon evaluation alignment
-
-The design supports the previously shared rubric:
-- Social Media Monitoring — 30%
-- App Store Monitoring — 30%
-- Brand Profile — 15%
-- User Experience — 15%
-- Presentation & Demo — 10%
-
-Use official brand reference information and clearly labeled simulated examples during the demo. Explain why each rule triggered and show evidence instead of presenting scores as certainty.
-
-## License
-
-Add a license file if your team chooses a license for public reuse.
+**Built by THE MAVERICKS | Team ID: XL0939**
